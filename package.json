@@ -1,0 +1,46 @@
+{
+  "name": "theme-dev",
+  "version": "0.0.2",
+  "description": "New base theme development environment for Genesis Child Themes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jerod Hammerstein",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "del": "^5.0.0",
+    "fs": "0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-bump": "^3.1.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-filter": "^6.0.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-phplint": "^0.9.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-rsync": "0.0.8",
+    "gulp-sass": "^4.0.2",
+    "gulp-sftp": "^0.1.5",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-template": "^5.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "projectSrcFolder": "src",
+  "projectDestFolder": "dest",
+  "projectScripts": [
+    "src/js/scripts.js"
+  ],
+  "projectVendorScripts": [
+    "src/js/vendor/debounce.js",
+    "src/js/vendor/video-lazyload.js"
+  ],
+  "projectScriptName": "scripts.js"
+}
