@@ -2,8 +2,10 @@ const {config} = require('../config/');
 const deployRemote = require('../lib/deployRemote');
 
 
-function deploy(){
-    return deployRemote( config.destFolder + '/**', '/');
+function deploy( cb ){
+    deployRemote( config.destFolder + '/**', '/');
+
+    cb();
 }
 
 exports.deploy = deploy;

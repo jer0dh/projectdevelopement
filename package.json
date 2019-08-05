@@ -1,6 +1,6 @@
 {
   "name": "theme-dev",
-  "version": "0.0.2",
+  "version": "0.0.24",
   "description": "New base theme development environment for Genesis Child Themes",
   "main": "index.js",
   "scripts": {
@@ -42,5 +42,8 @@
     "src/js/vendor/debounce.js",
     "src/js/vendor/video-lazyload.js"
   ],
-  "projectScriptName": "scripts.js"
+  "projectScriptName": "scripts.js",
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
 }
