@@ -1,6 +1,6 @@
 {
   "name": "theme-dev",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "New base theme development environment for Genesis Child Themes",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,8 @@
     "gulp-sass": "^4.0.2",
     "gulp-sftp": "^0.1.5",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-template": "^5.0.0"
+    "gulp-template": "^5.0.0",
+    "through2": "^3.0.1"
   },
   "browserslist": [
     "> 1%",
