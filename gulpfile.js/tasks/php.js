@@ -5,6 +5,7 @@ const {config} = require('../config/');
 const {getPackageJson} = require('../lib/getPackageJson');
 const newer = require('gulp-newer');
 const through2 = require('through2');
+const {modTime} = require('../lib/modTime');
 
 console.log( 'npm i -g phplint to install phplint globally');
 
@@ -24,12 +25,7 @@ function phpTemplateCopy() {
     return src([config.srcFolder + '/**/*.php'])
         .pipe(template({pkg: getPackageJson(), production: config.production }))
         .pipe(newer( config.destFolder ))
-        .pipe(through2.obj( function( file, enc, cb ) {
-            let date = new Date();
-            file.stat.atime = date;
-            file.stat.mtime = date;
-            cb( null, file );
-        }))
+        .pipe(through2.obj( modTime ))
         .pipe(dest( config.destFolder ));
 }
 
