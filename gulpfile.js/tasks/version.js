@@ -2,7 +2,7 @@ const { src, dest } = require('gulp');
 const {config} = require('../config/');
 const bump = require('gulp-bump');
 const {getPackageJson} = require('../lib/getPackageJson');
-const {modTime} = require('../lib/modTime');
+const through2 = require('through2');
 
 // Updates the version in package.json.  Using gulp-bump default of {type: 'patch'}. This
 // ups the value of the third number in the version.
@@ -14,7 +14,12 @@ function patch() {
 
     return src('./package.json')
         .pipe(bump({}))
-        .pipe(modTime)
+        .pipe(through2.obj( function( file, enc, cb ) {
+            let date = new Date();
+            file.stat.atime = date;
+            file.stat.mtime = date;
+            cb( null, file );
+        }))
         .pipe(dest('./'))
 }
 
