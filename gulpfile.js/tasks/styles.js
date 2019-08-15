@@ -11,7 +11,7 @@ const {getPackageJson} = require('../lib/getPackageJson');
 
 // Create CSS files unminified with source maps
 function stylesMaxSass() {
-    return src( [config.srcFolder + '/**/*.scss'])
+    return src( [config.srcFolder + '/**/*.scss'].concat( config.doNotProcessStyles ))
         .pipe(sourcemaps.init())
         .pipe(template( {pkg:getPackageJson() }))
         .pipe(sass().on('error', sass.logError))
@@ -22,7 +22,7 @@ function stylesMaxSass() {
 
 // Create CSS files minified with source maps
 function stylesMinSass() {
-    return src( [config.srcFolder + '/**/*.scss'])
+    return src( [config.srcFolder + '/**/*.scss'].concat( config.doNotProcessStyles ))
         .pipe(sourcemaps.init())
         .pipe(template( {pkg:getPackageJson() }))
         .pipe(sass({outputStyle: 'compressed', sourceMap: true}).on('error', sass.logError))

@@ -7,10 +7,11 @@ const newer = require('gulp-newer');
 const through2 = require('through2');
 const {modTime} = require('../lib/modTime');
 
-console.log( 'npm i -g phplint to install phplint globally');
 
 
 function phpLint() {
+console.log( 'npm i -g phplint to install phplint globally');
+
     return src( [config.srcFolder + '/**/*.php'])
         .pipe( phplint() )
         .pipe(phplint.reporter(function(file){

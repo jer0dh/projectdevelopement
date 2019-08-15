@@ -1,6 +1,6 @@
 {
   "name": "theme-dev",
-  "version": "0.0.41",
+  "version": "0.0.68",
   "description": "New base theme development environment for Genesis Child Themes",
   "main": "index.js",
   "scripts": {

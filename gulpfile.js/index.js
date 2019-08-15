@@ -17,4 +17,5 @@ function watchTasks() {
 }
 
 exports.patch = patch;
-exports.default = series(clean, patch, filesCopy, parallel( styles, php, javascript), deploy);
+exports.deploy = deploy;
+exports.default = series(clean, filesCopy, parallel( styles, php, javascript), deploy, watchTasks);

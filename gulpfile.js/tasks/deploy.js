@@ -3,7 +3,7 @@ const deployRemote = require('../lib/deployRemote');
 
 
 function deploy( cb ){
-    deployRemote( config.destFolder + '/**', '/');
+    deployRemote( config.destFolder, '/');
 
     cb();
 }

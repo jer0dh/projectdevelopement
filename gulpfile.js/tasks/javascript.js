@@ -27,7 +27,6 @@ function checkSrc(paths) {
 
   // Concatenate arrays of scripts
 const allScripts = config.projectVendorScripts.concat( config.projectScripts );
-console.log( allScripts )
 const negatedProjectVendorScripts = config.projectVendorScripts.map( (s) => '!' + s);
 const negatedProjectScripts = config.projectScripts.map( (s) => '!' + s);
 const negatedAllScripts = allScripts.map( (s) => '!' + s);
@@ -37,9 +36,10 @@ const negatedAllScripts = allScripts.map( (s) => '!' + s);
 //      Runs babel on projectScripts
 //      Concats scripts based on order in array into a file defined by projectScript
 //      Creates a minified version
-function mainScript() {
+function mainScript( cb ) {
     // A filter to only use scripts in projectScripts - take out vendor scripts
-    const noVendorFilter = filter( negatedProjectVendorScripts.concat( config.projectScripts ), {restore: true});  
+    const noVendorFilter = filter( negatedProjectVendorScripts.concat( config.projectScripts ), {restore: true});
+    if (allScripts && allScripts.length) {
     return checkSrc( allScripts )
     .pipe(sourcemaps.init())
     .pipe( noVendorFilter ) //no babel-ing of vendor files
@@ -53,10 +53,14 @@ function mainScript() {
         }
     }))
     .pipe(sourcemaps.write('./maps'))
-    .pipe( dest( config.destFolder + '/js'));    
+    .pipe( dest( config.destFolder + '/js'));
+}
+    else {
+    	cb();
+	}
 }
 
-// Babels Minifies any other javascript files under /js and moves to destination 
+// Babels Minifies any other javascript files under /js and moves to destination
 //      except for files in the projectScript arrays, *.min.js files, nor files in the js/vendor directory
 function minorScripts() {
     return src([config.srcFolder + '/js/**/*.js', '!'+ config.srcFolder + '/js/vendor/**/*.js', '!' + config.srcFolder + '/js/**/*.min.js'].concat(negatedAllScripts))
@@ -84,4 +88,22 @@ function minorVendorScripts() {
     .pipe( dest( config.destFolder + '/js/vendor'))
 }
 
-exports.javascript = parallel( mainScript, minorScripts, minorVendorScripts );
+/**
+ * Task to transcript and minify js in the template-parts or other locations in the theme_src
+ */
+
+function templatePartsScripts() {
+    return src([config.srcFolder + '/template-parts/**/*.js'])
+      //  .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(minify({
+            ext: {
+                min: '.min.js'
+            }
+        }))
+     //   .pipe(sourcemaps.write('./maps'))
+        .pipe( dest( config.destFolder + '/template-parts' ))
+}
+
+
+exports.javascript = parallel( mainScript, minorScripts, minorVendorScripts, templatePartsScripts );

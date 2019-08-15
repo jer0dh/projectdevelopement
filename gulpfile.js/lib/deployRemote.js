@@ -8,19 +8,21 @@ const deployRemote = (src, dest) => {
 
 
     if(config.rsync.active) {
-        return gulp.src([ src ])  //config.destFolder + '/**'
-            .pipe(rsync({
-                hostname: config.rsync.hostname,
-                destination: config.rsync.destination  + config.projectName,
-                root: config.destFolder,
-                username: config.rsync.username,
-                port: config.rsync.port,
-                incremental: true,
-                progress: true,
-                recursive: true,
-                clean: true,
-                exclude: ['.git', '*.scss']
-            }))
+        const options = {
+            hostname: config.rsync.hostname,
+            destination: config.rsync.destination  + config.projectName,
+            root: config.destFolder,
+            username: config.rsync.username,
+            port: config.rsync.port,
+            incremental: true,
+            progress: true,
+            recursive: true,
+            clean: true,
+            exclude: ['.git', '*.scss']
+        }
+      
+        return gulp.src( src )  //config.destFolder + '/**'
+            .pipe(rsync( options ))
     }
 
     if(config.sftp.active) {

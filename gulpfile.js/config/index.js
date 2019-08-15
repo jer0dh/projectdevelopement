@@ -18,6 +18,10 @@ config.doNotCopyList= [
         '!' + config.srcFolder + '/style.css',
     ];
 
+// Styles
+config.doNotProcessStyles = [
+        '!' + config.srcFolder + '/css/supporting/**/*.*'
+]
 
 // Javascript
 
